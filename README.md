@@ -1,97 +1,64 @@
-# 🔬 CerviScan-AI: Smart Wireless Digital Speculum with Computer Vision
-
 <div align="center">
-
-![CerviScan-AI Banner](https://img.shields.io/badge/Status-Active%20Development-success?style=for-the-badge)
-![Tech Stack](https://img.shields.io/badge/Frontend-React%2019%20%7C%20TypeScript%20%7C%20Vite-blue?style=for-the-badge)
-![AI Engine](https://img.shields.io/badge/AI-Google%20Gen%20AI%20%7C%20Gemini-orange?style=for-the-badge)
-![UI / UX](https://img.shields.io/badge/Styling-Tailwind%20CSS%20v4%20%7C%20Motion-purple?style=for-the-badge)
-
-<p align="center">
-  <strong>IoT-Enabled Wireless Digital Speculum & Real-Time Cervical Lesion Computer Vision Screener</strong>
-</p>
-
+  <h1>CerviScan-AI</h1>
+  <p><strong>Computer vision research prototype for assisted cervical sample review.</strong></p>
+  <p><a href="https://cerviscan-ai.syahmiaof.my">Open prototype</a> · <a href="https://syahmiaof.my/projects">Portfolio context</a></p>
 </div>
 
----
+![CerviScan-AI dashboard prototype](https://raw.githubusercontent.com/syahmiaof/syahmiaof/main/public/images/cerviscan-dashboard.webp)
 
-## 📌 Executive Overview
+> Research prototype in active development. The public dashboard uses demonstration data and is not a clinically validated diagnostic device.
 
-**CerviScan-AI** is an advanced medical-technology screening tool integrating an IoT-enabled smart wireless digital speculum with multimodal computer vision. Designed to enhance cervical cancer pre-screening, it empowers healthcare practitioners with real-time lesion visual analysis, automated risk classification, and clinical-grade reporting directly from point-of-care environments.
+## Project context
 
-By marrying localized imaging hardware with real-time AI multimodal reasoning (powered by Google Gemini Vision), CerviScan-AI bridges critical diagnostic gaps in community clinics and resource-limited medical centers.
+CerviScan-AI is a team project exploring an IoT-enabled imaging workflow for cervical screening research. The current software prototype focuses on receiving a video or image stream, supporting computer-vision analysis and presenting review information through a CMS-style dashboard.
 
----
+## My role
 
-## 🚀 Key Innovations & Features
+I build:
 
-- 📷 **Wireless Point-of-Care Imaging:** Integrates seamless wireless camera streaming from specialized optical speculum hardware into an encrypted clinical dashboard.
-- 🧠 **Computer Vision Lesion Detection:** Real-time visual inspection analyzing transformation zones, acetowhite changes, and vascular abnormalities.
-- 📊 **Multimodal Risk Stratification:** Instant diagnostic inference categorizing lesions (Normal, Low-Grade, High-Grade, Suspected Malignancy) with structured clinical confidence metrics.
-- ⚡ **Interactive Clinical Dashboard:** Built with React 19, Recharts data analytics, and TanStack Table for efficient patient consultation and longitudinal tracking.
-- 📑 **One-Click Diagnostic Reports:** Automated generation of structured pre-screening summaries, ready for referral workflows or electronic health record (EHR) integration.
+- the CMS and review dashboard;
+- the video-streaming application;
+- the YOLOv8 integration path for sample analysis;
+- the frontend workflow used to inspect and organise results.
 
----
+Clinical research, hardware development and broader project decisions involve the project team.
 
-## 🛠️ Architecture & Tech Stack
+## Current workflow
 
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend Framework** | React 19, TypeScript, Vite 8, Bun |
-| **UI Components & Styling** | Tailwind CSS v4, Motion (Framer Motion), Lucide Icons |
-| **Data Analytics & Tables** | Recharts, TanStack React Table |
-| **Artificial Intelligence** | `@google/genai` (Google Gemini Multimodal Vision API) |
-| **Backend & Routing** | Express.js, Node.js, Vercel Serverless Hosting |
+~~~text
+Imaging source → Video stream → Frame processing → YOLOv8 analysis → Review dashboard
+~~~
 
----
+## Stack
 
-## 💻 Local Setup & Development
+| Area | Technology |
+|---|---|
+| Interface | React 19, TypeScript, Vite |
+| Visualisation | Recharts, TanStack Table |
+| Computer vision | YOLOv8 integration |
+| Service layer | Node.js, Express |
+| Deployment | Vercel |
 
-Follow these steps to run the CerviScan-AI diagnostic console locally:
+## Local development
 
-### 1. Prerequisites
-- **Node.js** >= 20.x or **Bun** installed
-- A valid **Gemini API Key** from [Google AI Studio](https://aistudio.google.com/)
-
-### 2. Clone the Repository
-```bash
-git clone https://github.com/syahmiaof/CerviScan-AI.git
-cd CerviScan-AI
-```
-
-### 3. Install Dependencies
-```bash
+~~~bash
 npm install
-# or if using bun
-bun install
-```
-
-### 4. Configure Environment Variables
-Create a `.env` file in the root directory:
-```env
-GEMINI_API_KEY=your_gemini_api_key_here
-PORT=3000
-```
-
-### 5. Start Development Server
-```bash
 npm run dev
-```
-Visit `http://localhost:3000` in your browser to access the CerviScan-AI clinical interface.
+~~~
 
----
+Use the repository environment example for service configuration. API keys belong in local or deployment environment variables and must not be committed.
 
-## 🏥 Clinical Disclaimer & Ethics
+## Current limitations
 
-> [!IMPORTANT]
-> **CerviScan-AI is designed as an assistive diagnostic screening tool (Pre-screening / Decision Support)** and is intended to be used under the supervision of qualified medical professionals. It does not substitute histopathological examination, biopsy, or certified medical judgment.
+- The dashboard contains mock or demonstration records.
+- Model performance, sensitivity and specificity have not been established by this repository.
+- Regulatory, privacy, security and clinical validation work remains outside the current prototype.
+- Output must be reviewed by qualified professionals and must not replace histopathology, biopsy or clinical judgment.
 
----
+## Status
 
-## 👨‍💻 Author & Maintainer
+Active team development. The repository demonstrates application and integration work; it does not claim medical certification or diagnostic approval.
 
-**Muhammad Syahmi (syahmiaof)**  
-*Cloud, DevOps & Medical-Tech Systems Developer*  
-- 🌐 Website: [syahmiaof.my](https://syahmiaof.my)  
-- 🐙 GitHub: [@syahmiaof](https://github.com/syahmiaof)  
-- ✉️ Email: [syahmiaof123@gmail.com](mailto:syahmiaof123@gmail.com)
+## Builder
+
+[Muhammad Syahmi](https://syahmiaof.my) — CMS dashboard, video stream and AI integration.
