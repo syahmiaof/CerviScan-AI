@@ -8,3 +8,14 @@ coverage/
 !.env.example
 *.zip
 .vercel
+
+# Machine learning binary weights & artifacts
+*.pt
+*.pth
+__pycache__/
+*.pyc
+*.pyo
+
+# Local training datasets and training run outputs
+bebird/src/data_pipeline/dataset/
+bebird/src/data_pipeline/cerviscan_training/

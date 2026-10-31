@@ -1,0 +1,60 @@
+---
+
+## **Laporan Ringkas: Ekstraksi Stream Video Bebird R1 melalui Protokol UDP**
+
+### **1. Objektif**
+
+Mendapatkan paparan *live stream* daripada kamera pintar Bebird R1 terus ke PC/laptop menggunakan Python tanpa bergantung pada aplikasi rasmi mudah alih.
+
+---
+
+### **2. Masalah & Cabaran Asal**
+
+* **Pencilan Rangkaian WSL2 (NAT):** Penggunaan persekitaran Linux (WSL2) menyekat penerimaan paket UDP Broadcast dari kad rangkaian Wi-Fi Windows.
+
+
+* **Mekanisme Kawalan Kamera (Session Trigger):** Kamera tidak memancarkan video secara automatik. Ia memerlukan isyarat pemicu (*trigger command*) spesifik pada port kawalan.
+* **OpenCV / Standard Video Capture Fail:** Enjin standard `cv2.VideoCapture` gagal (*timeout*) kerana peranti tidak mengintegrasikan protokol standard seperti RTSP atau MJPEG HTTP.
+
+
+
+---
+
+### **3. Analisis Protokol & Penemuan Kejuruteraan Terbalik (*Reverse Engineering*)**
+
+* **IP Kamera (Gateway):** `192.168.5.1`
+* **Port Kawalan (Control Port):** UDP `58080`
+* **Arahan Pemicu Stream (Trigger Command):**
+* `b'\x20\x36'` (Hex: `20 36`) – Mula penghantaran stream video (*Start Video Stream*).
+* `b'\x20\x37'` (Hex: `20 37`) – Henti penghantaran stream video (*Stop Video Stream*).
+
+
+* **Format Data Video:**
+* Paket dikirim dalam bentuk segmen UDP (*chunked UDP packets*).
+* Paket pertama setiap *frame* mengandungi header JPEG `\xff\xd8` pada kedudukan offset `data[4:6]`.
+* Paket terakhir mengandungi penanda ekor JPEG `\xff\xd8` / `\xff\xd9`.
+
+
+
+---
+
+### **4. Langkah Penyelesaian**
+
+1. **Peralihan ke Windows Native Environment:** Menjalankan skrip Python terus pada Windows Command Prompt untuk mengakses terus kad rangkaian Wi-Fi `bebird-R1`.
+
+
+2. **Penghantaran Isyarat Pemicu UDP:** Menggunakan `socket.sendto()` untuk menghantar payload `20 36` ke `192.168.5.1:58080`.
+3. **Pencantuman Data Mentah (Payload Reassembly):**
+* Membuang header proprietari 4-byte terawal pada setiap paket UDP.
+* Mencantumkan bait data sehingga penanda tamat JPEG ditemui.
+
+
+4. **Dekod Imej Real-Time:** Memproses buffer data JPEG menggunakan `cv2.imdecode()` dan memaparkannya menerusi tetingkap GUI OpenCV.
+
+
+
+---
+
+### **5. Keputusan**
+
+Paparan video kamera Bebird R1 berjaya dipaparkan secara langsung (*real-time*) di tetingkap OpenCV PC.

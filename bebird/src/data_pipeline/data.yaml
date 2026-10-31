@@ -1,0 +1,18 @@
+names:
+- ASC-H
+- ASC-US
+- HSIL
+- LSIL
+- NILM
+- SCC
+nc: 6
+path: C:\Users\USER\Desktop\bebird\src\data_pipeline\dataset
+roboflow:
+  license: CC BY 4.0
+  project: cric-full-dataset
+  url: https://universe.roboflow.com/cervical-cancer-tullf/cric-full-dataset/dataset/7
+  version: 7
+  workspace: cervical-cancer-tullf
+test: test/images
+train: train/images
+val: valid/images
